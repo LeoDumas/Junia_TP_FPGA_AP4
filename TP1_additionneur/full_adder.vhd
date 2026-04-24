@@ -22,7 +22,7 @@ entity full_adder is
         Cin : in std_logic; -- Retenue à l'entrée
         -- Sorties
         S : out std_logic; -- Somme A + B + Cin
-        Cout : out std_logic; -- Retenue à la sortie
+        Cout : out std_logic -- Retenue à la sortie
 	);
 end full_adder;
 
@@ -37,7 +37,7 @@ begin
         A => A, 
         B => B,
         C => C1,
-        S => S1,
+        S => S1
     );
 
     instance_half_adder_2 : entity work.half_adder port map (
