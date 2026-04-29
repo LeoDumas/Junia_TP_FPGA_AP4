@@ -19,7 +19,8 @@ begin
 		Cout => Cout
 	);
 
-	add_2_bits_without_Cin_without_Cout : process begin
+	test : process begin
+		-- ### add_2_bits_without_Cin_without_Cout
 		-- 1+1+0
 		A <= "0001";
 		B <= "0001";
@@ -29,8 +30,6 @@ begin
 
 		assert S = "0010" report "Sum error in full_adder_4b (1+1+0)" severity error;
 		assert Cout = '0' report "Carry error in full_adder_4b (1+1+0)" severity error;
-
-
 		-- 5+5+0
 		A <= "0101";
 		B <= "0101";
@@ -40,9 +39,8 @@ begin
 
 		assert S = "1010" report "Sum error in full_adder_4b (5+5+0)" severity error;
 		assert Cout = '0' report "Carry error in full_adder_4b (5+5+0)" severity error;
-	end process;
 
-	add_2_bits_without_Cin_with_Cout : process begin
+		-- ### add_2_bits_without_Cin_with_Cout
 		-- 9+9+0
 		A <= "1001";
 		B <= "1001";
@@ -62,9 +60,8 @@ begin
 
 		assert S = "1110" report "Sum error in full_adder_4b (15+15+0)" severity error;
 		assert Cout = '1' report "Carry error in full_adder_4b (15+15+0)" severity error;
-	end process;
 
-	add_2_bits_with_Cin_without_Cout : process begin
+		-- ### add_2_bits_with_Cin_without_Cout
 		-- 1+1+1
 		A <= "0001";
 		B <= "0001";
@@ -84,9 +81,8 @@ begin
 
 		assert S = "0111" report "Sum error in full_adder_4b (3+3+1)" severity error;
 		assert Cout = '0' report "Carry error in full_adder_4b (3+3+1)" severity error;
-	end process;
 
-	add_2_bits_with_Cin_with_Cout : process begin
+		-- ### add_2_bits_with_Cin_with_Cout
 		-- 15+15+1
 		A <= "1111";
 		B <= "1111";
