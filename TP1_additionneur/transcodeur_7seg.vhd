@@ -29,7 +29,7 @@ use ieee.numeric_std.all;
 -- 1 1 0 0 | c   | 0 1 1 1 0 0 1
 -- 1 1 0 1 | d   | 1 0 1 1 1 1 0
 -- 1 1 1 0 | e   | 1 1 1 1 0 0 1
--- 1 1 1 1 | f   | 1 1 1 0 0 0 1
+-- 1 1 1 1 | f   | 1 1 1 0 0 0 1 
 
 -- Une fois la table de vérité dressé, nos réflexes nous indiquent de chercher les équations
 -- (que l'on peut trouver sur https://www.paturage.be/electro/inforauto/codage/decodeur7seg.html)
@@ -46,7 +46,7 @@ use ieee.numeric_std.all;
 entity transcodeur_7seg is
 	port (
         -- Entrées
-        BIN : in std_logic_vector (3 downto 0)
+        BIN : in std_logic_vector (3 downto 0);
         -- Sorties
         SEG : out std_logic_vector (6 downto 0)
 	);
