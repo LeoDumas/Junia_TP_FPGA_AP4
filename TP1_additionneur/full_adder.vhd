@@ -13,7 +13,11 @@ use ieee.numeric_std.all;
 -- 1 1 0    | 0 1
 -- 1 1 1    | 1 1
 
--- DESCRIPTION DES ENTREES/SORTIES DE L'ENTITY
+-- Fonctionnement
+-- 1. Addition de A+B via le 1er half_adder, on récupère la retenue C1 et le résultat S1
+-- 2. Addition de C1+S1 via le 2ème half_adder, on récupère la retenue C2 et le résultat S
+-- 3. On retourne S, C<=C1 OR C2
+
 entity full_adder is
 	port (
         -- Entrées        
@@ -26,12 +30,10 @@ entity full_adder is
 	);
 end full_adder;
 
--- DESCRIPTION COMPORTEMENTALE DE L'ENTITY
 architecture behavioral of full_adder is
 signal C1 : std_logic;
 signal S1 : std_logic;
 signal C2 : std_logic;
-signal S2 : std_logic;
 begin
     instance_half_adder_1 : entity work.half_adder port map (
         A => A, 
@@ -43,10 +45,9 @@ begin
     instance_half_adder_2 : entity work.half_adder port map (
         A => S1, 
         B => Cin,
-        S => S2,
+        S => S,
         C => C2
     );
     
     Cout <= C1 OR C2;
-    S <= S2;
 end behavioral;
