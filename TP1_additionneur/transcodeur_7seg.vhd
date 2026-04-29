@@ -2,6 +2,9 @@ library ieee ;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+-- Transcode un mot de 4 bits en mot de 7 bits pour l'affichage 7 segments
+
+-- Exemple :
 --    a
 --  +---+
 -- f|   |b          gfedcba
@@ -10,8 +13,8 @@ use ieee.numeric_std.all;
 --  +---+
 --    d
 
--- Table de vérité de l'entité
--- BIN (B  |     | SEG
+-- Table de vérité de l'entité :
+-- BIN     |     | SEG
 -- 3 2 1 0 | hex | g f e d c b a
 -- -----------------------------
 -- 0 0 0 0 | 0   | 1 0 0 0 0 0 0
@@ -42,7 +45,6 @@ use ieee.numeric_std.all;
 -- g = B3.B2.B1 + B3.B2.B1.B0 + B3.B2.B1.B0
 -- Mais en fpga nous pouvons aussi faire un switch case, il n'y a pas tant de cas.
 
--- DESCRIPTION DES ENTREES/SORTIES DE L'ENTITY
 entity transcodeur_7seg is
 	port (
         -- Entrées
@@ -52,7 +54,6 @@ entity transcodeur_7seg is
 	);
 end transcodeur_7seg;
 
--- DESCRIPTION COMPORTEMENTALE DE L'ENTITY
 architecture behavioral of transcodeur_7seg is
 begin
     with BIN select
