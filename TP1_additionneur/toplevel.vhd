@@ -5,11 +5,11 @@ use ieee.numeric_std.all;
 entity toplevel is
 	port (
 		-- Entrées
-		SW : in std_logic_vector(9 downto 0)
+		SW : in std_logic_vector(9 downto 0);
 		-- Sorties
 		HEX3 : out std_logic_vector(6 downto 0);
 		HEX2 : out std_logic_vector(6 downto 0);
-		HEX0 : out std_logic_vector(6 downto 0);
+		HEX0 : out std_logic_vector(6 downto 0)
 	);
 end toplevel;
 
@@ -29,18 +29,18 @@ begin
 	-- Affichage de A
 	instance_transcodeur_7seg_1 : entity work.transcodeur_7seg port map (
         BIN => SW(3 downto 0),
-        SEG => HEX3,
+        SEG => HEX3
     );
 
 	-- Affichage de B
 	instance_transcodeur_7seg_2 : entity work.transcodeur_7seg port map (
         BIN => SW(7 downto 4),
-        SEG => HEX2,
+        SEG => HEX2
     );
 
 	-- Affichage de A+B
 	instance_transcodeur_7seg_3 : entity work.transcodeur_7seg port map (
         BIN => S,
-        SEG => HEX0,
+        SEG => HEX0
     );
 end behavioral;
