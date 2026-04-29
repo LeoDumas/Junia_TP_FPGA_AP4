@@ -31,8 +31,8 @@ use ieee.numeric_std.all;
 -- 1 1 1 0 | e   | 1 1 1 1 0 0 1
 -- 1 1 1 1 | f   | 1 1 1 0 0 0 1
 
--- Equations
--- Sourcé de https://www.paturage.be/electro/inforauto/codage/decodeur7seg.html
+-- Une fois la table de vérité dressé, nos réflexes nous indiquent de chercher les équations
+-- (que l'on peut trouver sur https://www.paturage.be/electro/inforauto/codage/decodeur7seg.html)
 -- a = B3.B2.B1.B0 + B3.B2.B1.B0 + B3.B2.B1.B0 + B3.B2.B1.B0
 -- b = B3.B2.B1.B0 + B3.B2.B1.B0 + B3.B1.B0 + B2.B1.B0
 -- c = B3.B2.B1.B0 + B3.B2.B1.B0 + B3.B2.B1
@@ -40,6 +40,7 @@ use ieee.numeric_std.all;
 -- e = B3.B0 + B3.B2.B1 + B3.B2.B1.B0
 -- f = B3.B2.B0 + B3.B2.B1 + B3.B1.B0 + B3.B2.B1.B0
 -- g = B3.B2.B1 + B3.B2.B1.B0 + B3.B2.B1.B0
+-- Mais en fpga nous pouvons aussi faire un switch case, il n'y a pas tant de cas.
 
 -- DESCRIPTION DES ENTREES/SORTIES DE L'ENTITY
 entity transcodeur_7seg is
@@ -54,9 +55,22 @@ end transcodeur_7seg;
 -- DESCRIPTION COMPORTEMENTALE DE L'ENTITY
 architecture behavioral of transcodeur_7seg is
 begin
-
-    -- Ecrire ici les instructions cocurrentes décrivant le comportement de l'entity
-    /a = /A3./A2./A1.A0 + /A3.A2./A1./A0 + A3.A2./A1.A0 + A3./A2.A1.A0
-	-- ex. X <= not(A);
-	-- ex. S <= not(X);
+    with BIN select
+        SEG <= "0111111" when "0000", -- 0
+        "0000110" when "0001", -- 1
+        "1011011" when "0010", -- 2
+        "1001111" when "0011", -- 3
+        "1100110" when "0100", -- 4
+        "1101101" when "0101", -- 5
+        "1111101" when "0110", -- 6
+        "0000111" when "0111", -- 7
+        "1111111" when "1000", -- 8
+        "1101111" when "1001", -- 9
+        "1110111" when "1010", -- a
+        "1111100" when "1011", -- b
+        "0111001" when "1100", -- c
+        "1011110" when "1101", -- d
+        "1111001" when "1110", -- e
+        "1110001" when "1111", -- f
+        "0000000" when others; -- rien
 end behavioral;
