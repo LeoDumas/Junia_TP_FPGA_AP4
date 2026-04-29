@@ -9,13 +9,13 @@ entity toplevel is
 		-- Sorties
 		HEX3 : out std_logic_vector(6 downto 0);
 		HEX2 : out std_logic_vector(6 downto 0);
-		HEX0 : out std_logic_vector(6 downto 0)
+		HEX0 : out std_logic_vector(6 downto 0);
+		LEDR : out std_logic_vector(9 downto 0);
 	);
 end toplevel;
 
 architecture behavioral of toplevel is
 	signal S : std_logic_vector(3 downto 0);
-	signal Cout : std_logic;
 begin
 	-- A+B
     instance_full_adder_4b_1 : entity work.full_adder_4b port map (
@@ -23,7 +23,7 @@ begin
         B => SW(7 downto 4),
         Cin => SW(9),
         S => S,
-		Cout => Cout
+		Cout => LEDR(5)
     );
 
 	-- Affichage de A
