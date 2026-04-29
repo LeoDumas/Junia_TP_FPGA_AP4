@@ -14,7 +14,7 @@ entity toplevel is
 end toplevel;
 
 architecture behavioral of toplevel is
-	signal S : std_logic_vector(4 downto 0);
+	signal S : std_logic_vector(3 downto 0);
 	signal Cout : std_logic;
 begin
 	-- A+B
