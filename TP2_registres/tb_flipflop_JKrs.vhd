@@ -29,9 +29,7 @@ begin
     -- Processus de génération de l'horloge
     clk_process : process
     begin
-        CLK <= '0';
-        wait for clk_period/2;
-        CLK <= '1';
+        CLK <= not(CLK);
         wait for clk_period/2;
     end process;
 
