@@ -32,9 +32,9 @@ entity shift_register_universal8 is
         RSTn : in std_logic; -- Reset* (asynchrone, active à l’état bas)
         
         -- Sorties
-        SOR : in std_logic; -- Shift output right
-        SOL : in std_logic; -- Shift output left
-        Qo : in std_logic_vector(7 downto 0) -- Parallel outputs
+        SOR : out std_logic; -- Shift output right
+        SOL : out std_logic; -- Shift output left
+        Qo : out std_logic_vector(7 downto 0) -- Parallel outputs
     );
 end shift_register_universal8;
 
@@ -53,22 +53,20 @@ begin
             
         elsif rising_edge(CLK) then 
             -- Fonctionnement synchrone classique de la bascule JK
-            if (SEL = "-00") then -- Hold (Memorize)
+            if (SEL(1 downto 0) = "00") then -- Hold (Memorize)
                 Qint <= Qint;       
-            elsif (SEL = "-11") then -- Parallel load
+            elsif (SEL(1 downto 0) = "11") then -- Parallel load
                 Qint <= Pi;   
             elsif (SEL = "001") then -- Shift right
-                SOR <= Qint(0);
-                Qint <= Qint srl 1;  
-                Qint(7) <= SSR;
+                SOR  <= Qint(0);
+                Qint <= SSR & Qint(7 downto 1);
             elsif (SEL = "010") then -- Shift left
-                SOL <= Qint(7);
-                Qint <= Qint sll 1; 
-                Qint(0) <= SSL;
+                SOL  <= Qint(7);
+                Qint <= Qint(6 downto 0) & SSL;
             elsif (SEL = "101") then -- Rotate right
-                Qint <= Qint ror 1;    
+                Qint <= Qint(0) & Qint(7 downto 1);
             elsif (SEL = "110") then -- Rotate left
-                Qint <= Qint rol 1;    
+                Qint <= Qint(6 downto 0) & Qint(7);
             end if;
         end if;
     end process;

@@ -19,8 +19,8 @@ architecture tb of tb_shift_register_universal8 is
     -- Entrées
     signal SSR : std_logic := '0'; -- Shift right serial input
     signal SSL : std_logic := '0'; -- Shift left serial input
-    signal Pi : std_logic_vector(7 downto 0) := '00000000'; -- 8 bits Parallel input
-    signal SEL : std_logic_vector(2 downto 0) := '000'; -- Mode selection :
+    signal Pi : std_logic_vector(7 downto 0) := "00000000"; -- 8 bits Parallel input
+    signal SEL : std_logic_vector(2 downto 0) := "000"; -- Mode selection :
     -- - X00 : Hold (Memorize)
     -- - X11 : Parallel load
     -- - 001 : Shift right
@@ -34,7 +34,7 @@ architecture tb of tb_shift_register_universal8 is
     -- Sorties
     signal SOR : std_logic := '0'; -- Shift output right
     signal SOL : std_logic := '0'; -- Shift output left
-    signal Qo : std_logic_vector(7 downto 0) := '00000000'; -- Parallel outputs
+    signal Qo : std_logic_vector(7 downto 0) := "00000000"; -- Parallel outputs
 
     -- Définition de la période d'horloge
     constant clk_period : time := 20 ns;
@@ -54,7 +54,7 @@ begin
         -- Sorties
         SOR => SOR,
         SOL => SOL,
-        Qo => Qo,
+        Qo => Qo
     );
 
     -- Processus de génération de l'horloge
@@ -168,7 +168,7 @@ begin
             report "ERREUR ROTATE LEFT"
             severity error;
 
-        report "TOUS LES TESTS SONT PASSÉS" severity note;
+        report "TOUS LES TESTS SONT PASSES" severity note;
         wait;
 
     end process;
