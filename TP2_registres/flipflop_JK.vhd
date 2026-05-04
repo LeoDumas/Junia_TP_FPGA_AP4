@@ -33,10 +33,19 @@ begin
     process(CLK)
     begin
         if rising_edge(CLK) then 
-            Qint <= Qint        when (J='0' and K='0') else -- Pas de changement (verrou)
-                    not Qint    when (J='1' and K='1') else -- Bascule (Q devient 1 si était 0, inversement)
-                    '0'         when (J='0' and K='1') else -- Réinitialiser (Q devient 0)
-                    '1'         ;                           -- Set (Q devient 1)
+            -- Pas de changement (verrou)
+            if (J='0' and K='0') then
+                Qint <= Qint;
+            -- Bascule (Q s'inverse)
+            elsif (J='1' and K='1') then 
+                Qint <= not Qint;
+            -- Réinitialiser (Q devient 0)
+            elsif (J='0' and K='1') then
+                Qint <= '0';
+            -- Set (Q devient 1)
+            else
+                Qint <= '1';
+            end if;
         end if;
 
         Q <= Qint;
