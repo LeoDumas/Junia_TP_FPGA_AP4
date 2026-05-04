@@ -43,16 +43,17 @@ begin
             -- Preset asynchrone
             Qint <= '1';
             
-        elsif rising_edge(CLK) then 
+        -- Rising_edge(CLK) du cours
+        elsif (CLK'event and CLK = '1') then 
             -- Fonctionnement synchrone classique de la bascule JK
             if (J='0' and K='0') then
-                Qint <= Qint;       -- Pas de changement (verrou)
+                Qint <= Qint; -- Pas de changement (verrou)
             elsif (J='1' and K='1') then
-                Qint <= not Qint;   -- Bascule
+                Qint <= not Qint; -- Bascule
             elsif (J='0' and K='1') then
-                Qint <= '0';        -- Réinitialiser
+                Qint <= '0'; -- Réinitialiser
             else
-                Qint <= '1';        -- Set
+                Qint <= '1'; -- Set
             end if;
         end if;
     end process;
